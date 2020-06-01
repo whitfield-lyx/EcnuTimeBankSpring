@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/ecnutimebank?serverTimezone=UTC</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="EcnuTimeBank" uuid="fc0474d8-69cc-4ed3-bea3-ad82262afb2a">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://rm-uf6np0fpyhz82r9ngeo.mysql.rds.aliyuncs.com:3306/ecnu_time_bank</jdbc-url>
+    </data-source>
   </component>
 </project>

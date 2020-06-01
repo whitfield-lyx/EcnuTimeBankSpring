@@ -9,14 +9,23 @@ public class User {
 
     private String userPassword;
 
-    private String userPhoto;
+    private String userTelephone;
 
-    public User(Integer userId, String userName, String userType, String userPassword, String userPhoto) {
+    private String userGender;
+
+    private Double userBalance;
+
+    private String userStudentId;
+
+    public User(Integer userId, String userName, String userType, String userPassword, String userTelephone, String userGender, Double userBalance, String userStudentId) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
         this.userPassword = userPassword;
-        this.userPhoto = userPhoto;
+        this.userTelephone = userTelephone;
+        this.userGender = userGender;
+        this.userBalance = userBalance;
+        this.userStudentId = userStudentId;
     }
 
     public User() {
@@ -55,11 +64,35 @@ public class User {
         this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
-    public String getUserPhoto() {
-        return userPhoto;
+    public String getUserTelephone() {
+        return userTelephone;
     }
 
-    public void setUserPhoto(String userPhoto) {
-        this.userPhoto = userPhoto == null ? null : userPhoto.trim();
+    public void setUserTelephone(String userTelephone) {
+        this.userTelephone = userTelephone == null ? null : userTelephone.trim();
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender == null ? null : userGender.trim();
+    }
+
+    public Double getUserBalance() {
+        return userBalance;
+    }
+
+    public void setUserBalance(Double userBalance) {
+        this.userBalance = userBalance;
+    }
+
+    public String getUserStudentId() {
+        return userStudentId;
+    }
+
+    public void setUserStudentId(String userStudentId) {
+        this.userStudentId = userStudentId == null ? null : userStudentId.trim();
     }
 }

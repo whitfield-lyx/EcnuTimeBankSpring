@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecnu_time_bank.mapper.FacilityMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecnu_time_bank.entity.Facility">
+    <constructor>
+      <idArg column="facility_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="facility_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="facility_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="facility_description" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    facility_id, facility_name, facility_address, facility_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from facility
+    where facility_id = #{facilityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from facility
+    where facility_id = #{facilityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.ecnu_time_bank.entity.Facility">
+    insert into facility (facility_id, facility_name, facility_address, 
+      facility_description)
+    values (#{facilityId,jdbcType=INTEGER}, #{facilityName,jdbcType=VARCHAR}, #{facilityAddress,jdbcType=VARCHAR}, 
+      #{facilityDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecnu_time_bank.entity.Facility">
+    insert into facility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        facility_id,
+      </if>
+      <if test="facilityName != null">
+        facility_name,
+      </if>
+      <if test="facilityAddress != null">
+        facility_address,
+      </if>
+      <if test="facilityDescription != null">
+        facility_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="facilityId != null">
+        #{facilityId,jdbcType=INTEGER},
+      </if>
+      <if test="facilityName != null">
+        #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityAddress != null">
+        #{facilityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityDescription != null">
+        #{facilityDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecnu_time_bank.entity.Facility">
+    update facility
+    <set>
+      <if test="facilityName != null">
+        facility_name = #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityAddress != null">
+        facility_address = #{facilityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityDescription != null">
+        facility_description = #{facilityDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where facility_id = #{facilityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecnu_time_bank.entity.Facility">
+    update facility
+    set facility_name = #{facilityName,jdbcType=VARCHAR},
+      facility_address = #{facilityAddress,jdbcType=VARCHAR},
+      facility_description = #{facilityDescription,jdbcType=VARCHAR}
+    where facility_id = #{facilityId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -7,14 +7,18 @@
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_telephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_balance" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="user_student_id" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, user_type, user_password, user_photo
+    user_id, user_name, user_type, user_password, user_telephone, user_gender, user_balance, 
+    user_student_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from user
     where user_id = #{userId,jdbcType=INTEGER}
@@ -24,10 +28,12 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.ecnu_time_bank.entity.User">
-    insert into user (user_id, user_name, user_type,
-      user_password, user_photo)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR},
-      #{userPassword,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR})
+    insert into user (user_id, user_name, user_type, 
+      user_password, user_telephone, user_gender, 
+      user_balance, user_student_id)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userTelephone,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, 
+      #{userBalance,jdbcType=DOUBLE}, #{userStudentId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecnu_time_bank.entity.User">
     insert into user
@@ -44,8 +50,17 @@
       <if test="userPassword != null">
         user_password,
       </if>
-      <if test="userPhoto != null">
-        user_photo,
+      <if test="userTelephone != null">
+        user_telephone,
+      </if>
+      <if test="userGender != null">
+        user_gender,
+      </if>
+      <if test="userBalance != null">
+        user_balance,
+      </if>
+      <if test="userStudentId != null">
+        user_student_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -61,8 +76,17 @@
       <if test="userPassword != null">
         #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="userPhoto != null">
-        #{userPhoto,jdbcType=VARCHAR},
+      <if test="userTelephone != null">
+        #{userTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userBalance != null">
+        #{userBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="userStudentId != null">
+        #{userStudentId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -78,8 +102,17 @@
       <if test="userPassword != null">
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="userPhoto != null">
-        user_photo = #{userPhoto,jdbcType=VARCHAR},
+      <if test="userTelephone != null">
+        user_telephone = #{userTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        user_gender = #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userBalance != null">
+        user_balance = #{userBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="userStudentId != null">
+        user_student_id = #{userStudentId,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
@@ -89,7 +122,10 @@
     set user_name = #{userName,jdbcType=VARCHAR},
       user_type = #{userType,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
-      user_photo = #{userPhoto,jdbcType=VARCHAR}
+      user_telephone = #{userTelephone,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=VARCHAR},
+      user_balance = #{userBalance,jdbcType=DOUBLE},
+      user_student_id = #{userStudentId,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>
