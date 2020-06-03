@@ -1,5 +1,20 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-*.pb
-/.mvn
-/.idea
-/build
+### IntelliJ IDEA ###
+/.idea/sonarlint
+/.idea/libraries/
+/.idea/workspace.xml
+/.idea/inspectionProfiles/
+*.iws
+*.ipr
+
+
+### VS Code ###
+.vscode/
+/mvnw
+/mvnw.cmd
+/.mvn/
