@@ -32,7 +32,6 @@ public class OrderController {
 
     @PutMapping("")
     public Result updateOrder(@RequestBody Order order) {
-//        todo 检查是否存在order_id
         return orderService.update(order);
     }
 
