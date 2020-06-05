@@ -2,12 +2,10 @@ package com.example.ecnu_time_bank.service;
 
 import com.example.ecnu_time_bank.entity.User;
 import com.example.ecnu_time_bank.mapper.UserMapper;
-
 import com.example.ecnu_time_bank.utils.Result;
 import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class UserServiceImpl implements UserService{
             userMapper.deleteByPrimaryKey(ID);
             return ResultFactory.buildSuccessResult("用户,userID = "+ID+" 删除成功");
         }
-
     }
 
     @Override
