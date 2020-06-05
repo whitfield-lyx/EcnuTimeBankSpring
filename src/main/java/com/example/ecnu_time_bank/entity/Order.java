@@ -1,13 +1,13 @@
 package com.example.ecnu_time_bank.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Order {
     private Integer orderId;
 
     private String orderTitle;
 
-    private Date orderPubleshedTime;
+    private Timestamp orderPubleshedTime;
 
     private String orderDescription;
 
@@ -29,7 +29,7 @@ public class Order {
 
     private String orderState;
 
-    public Order(Integer orderId, String orderTitle, Date orderPubleshedTime, String orderDescription, String orderType, String orderTime, String orderAddress, String orderTelephone, Integer orderBonus, Integer orderPublisherId, Integer orderAccpetersId, Integer orderEmployeeListId, String orderState) {
+    public Order(Integer orderId, String orderTitle, Timestamp orderPubleshedTime, String orderDescription, String orderType, String orderTime, String orderAddress, String orderTelephone, Integer orderBonus, Integer orderPublisherId, Integer orderAccpetersId, Integer orderEmployeeListId, String orderState) {
         this.orderId = orderId;
         this.orderTitle = orderTitle;
         this.orderPubleshedTime = orderPubleshedTime;
@@ -65,11 +65,11 @@ public class Order {
         this.orderTitle = orderTitle == null ? null : orderTitle.trim();
     }
 
-    public Date getOrderPubleshedTime() {
+    public Timestamp getOrderPubleshedTime() {
         return orderPubleshedTime;
     }
 
-    public void setOrderPubleshedTime(Date orderPubleshedTime) {
+    public void setOrderPubleshedTime(Timestamp orderPubleshedTime) {
         this.orderPubleshedTime = orderPubleshedTime;
     }
 
