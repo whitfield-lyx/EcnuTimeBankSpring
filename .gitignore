@@ -18,3 +18,4 @@ target/
 /mvnw
 /mvnw.cmd
 /.mvn/
+.idea/vcs.xml
