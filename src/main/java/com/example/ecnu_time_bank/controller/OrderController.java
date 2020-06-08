@@ -16,12 +16,12 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/{orderId}")
-    public Order getOrderById(@PathVariable Integer orderId) {
+    public Result getOrderById(@PathVariable Integer orderId) {
         return orderService.selectByID(orderId);
     }
 
     @GetMapping("/offset/{offset}")
-    public List<Order> getTenOrderOrderedByTime(@PathVariable Integer offset) {
+    public Result getTenOrderOrderedByTime(@PathVariable Integer offset) {
         return orderService.selectTenOrder(offset);
     }
 
@@ -41,7 +41,7 @@ public class OrderController {
     }
 
     @GetMapping("/type/{type}/offset/{offset}")
-    public List<Order> getTenOrderByType(@PathVariable String type, @PathVariable Integer offset) {
+    public Result getTenOrderByType(@PathVariable String type, @PathVariable Integer offset) {
         return orderService.selectTenOrderByType(type, offset);
     }
 }

@@ -16,19 +16,37 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public User selectByID(Integer ID) {
-        return userMapper.selectByPrimaryKey(ID);
+    public Result selectByID(Integer ID) {
+        User user = userMapper.selectByPrimaryKey(ID);
+        if (user==null){
+            return ResultFactory.buildFailResult("未找到该用户,userID = " + ID);
+        }
+        else{
+            return ResultFactory.buildSuccessResult(user);
+        }
+
     }
 
     @Override
-    public List<User> selectAllUser() {
-        return userMapper.selectAllUser();
+    public Result selectAllUser() {
+        List<User> userList = userMapper.selectAllUser();
+        if (userList.isEmpty()){
+            return ResultFactory.buildFailResult("不存在用户");
+        }
+        else{
+            return ResultFactory.buildSuccessResult(userList);
+        }
     }
 
     @Override
-    public List<User> selectByUserName(String userName) {
+    public Result selectByUserName(String userName) {
         List<User> userList = userMapper.selectByUserName(userName);
-        return userList;
+        if (userList.isEmpty()){
+            return ResultFactory.buildFailResult("未找到用户,username = " + userName);
+        }
+        else{
+            return ResultFactory.buildSuccessResult(userList);
+        }
     }
 
     @Override
@@ -39,7 +57,7 @@ public class UserServiceImpl implements UserService{
         }
         else{
             userMapper.deleteByPrimaryKey(ID);
-            return ResultFactory.buildSuccessResult("用户,userID = "+ID+" 删除成功");
+            return ResultFactory.buildSuccessResult(null);
         }
     }
 
@@ -47,7 +65,13 @@ public class UserServiceImpl implements UserService{
     public Result updata(User user) {
         userMapper.updateByPrimaryKeySelective(user);
         int ID = user.getUserId();
-        return ResultFactory.buildSuccessResult("用户,userID = "+ID+" 修改成功");
+        User newUser = userMapper.selectByPrimaryKey(ID);
+        if (newUser==null){
+            return ResultFactory.buildFailResult("修改用户失败");
+        }
+        else{
+            return ResultFactory.buildSuccessResult(newUser);
+        }
     }
 
     @Override
@@ -55,7 +79,7 @@ public class UserServiceImpl implements UserService{
         List<User> userList = userMapper.selectByUserName(user.getUserName());
         if(userList.isEmpty()){
             userMapper.insert(user);
-            return ResultFactory.buildSuccessResult("用户注册成功");
+            return ResultFactory.buildSuccessResult(user);
         }
         else {
             return ResultFactory.buildFailResult("已存在该用户名的用户");

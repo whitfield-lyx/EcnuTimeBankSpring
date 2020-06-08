@@ -1,5 +1,7 @@
 package com.example.ecnu_time_bank.utils;
 
+import java.util.List;
+
 public class Result {
     /**
      * 响应状态码
@@ -43,4 +45,6 @@ public class Result {
     public void setData(Object data) {
         this.data = data;
     }
+
+
 }

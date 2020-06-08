@@ -21,18 +21,18 @@ public class UserController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getUser()
+    public Result getUser()
     {
         return userService.selectAllUser();
     }
     /**
      * 根据用户名userName返回用户信息
      */
-    @GetMapping("/{userName}")
+    @GetMapping("/{userID}")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getUserByUserName(@PathVariable("userName") String userName)
+    public Result getUserByUserName(@PathVariable("userID") Integer userID)
     {
-        return userService.selectByUserName(userName);
+        return userService.selectByID(userID);
     }
 
     /**

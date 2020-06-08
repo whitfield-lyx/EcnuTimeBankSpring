@@ -13,19 +13,30 @@
     facility_id, facility_name, facility_address, facility_description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from facility
     where facility_id = #{facilityId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByFacilityName" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from facility
+      where facility_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllFacility" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from facility
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from facility
     where facility_id = #{facilityId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.ecnu_time_bank.entity.Facility">
-    insert into facility (facility_id, facility_name, facility_address, 
+    insert into facility (facility_id, facility_name, facility_address,
       facility_description)
-    values (#{facilityId,jdbcType=INTEGER}, #{facilityName,jdbcType=VARCHAR}, #{facilityAddress,jdbcType=VARCHAR}, 
+    values (#{facilityId,jdbcType=INTEGER}, #{facilityName,jdbcType=VARCHAR}, #{facilityAddress,jdbcType=VARCHAR},
       #{facilityDescription,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecnu_time_bank.entity.Facility">

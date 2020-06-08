@@ -3,6 +3,7 @@ package com.example.ecnu_time_bank.service;
 import com.example.ecnu_time_bank.entity.Order;
 import com.example.ecnu_time_bank.mapper.OrderMapper;
 import com.example.ecnu_time_bank.utils.Result;
+import com.example.ecnu_time_bank.utils.ResultCode;
 import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,13 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper orderMapper;
 
     @Override
-    public Order selectByID(Integer ID) {
-        return orderMapper.selectById(ID);
+    public Result selectByID(Integer ID) {
+        Order result =  orderMapper.selectById(ID);
+        if (result == null) {
+            return ResultFactory.buildFailResult("未找到该需求,orderId = " + ID);
+        } else {
+            return ResultFactory.buildSuccessResult(result);
+        }
     }
 
     @Override
@@ -28,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
         if (result == 0) {
             return ResultFactory.buildFailResult("未找到该需求,orderId = " + ID);
         } else {
-            return ResultFactory.buildSuccessResult("用户,orderId = " + ID + " 删除成功");
+            return ResultFactory.buildResult(ResultCode.SUCCESS,"删除成功 OrderId = "+ID,null);
         }
     }
 
@@ -46,10 +52,11 @@ public class OrderServiceImpl implements OrderService {
         orderExisted.setOrderDescription(order.getOrderDescription() != null ? order.getOrderDescription() : orderExisted.getOrderDescription());
         orderExisted.setOrderAddress(order.getOrderAddress() != null ? order.getOrderAddress() : orderExisted.getOrderAddress());
         int result = orderMapper.update(orderExisted);
+        Order newOrder = orderMapper.selectById(order.getOrderId());
         if (result == 0) {
             return ResultFactory.buildFailResult("未成功更新该需求,orderId = " + order.getOrderId());
         } else {
-            return ResultFactory.buildSuccessResult("用户,orderId = " + order.getOrderId() + " 更新成功");
+            return ResultFactory.buildSuccessResult(newOrder);
         }
     }
 
@@ -61,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
         if (result == 0) {
             return ResultFactory.buildFailResult("需求添加失败,orderId = " + order.getOrderId());
         } else {
-            return ResultFactory.buildSuccessResult("需求添加成功,orderId = " + order.getOrderId());
+            return ResultFactory.buildSuccessResult(order);
         }
     }
 
@@ -71,12 +78,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> selectTenOrder(int offset) {
-        return orderMapper.selectTenOrder(offset);
+    public Result selectTenOrder(int offset) {
+        List<Order> orderList = orderMapper.selectTenOrder(offset);
+        if ( orderList.isEmpty()){
+            return ResultFactory.buildFailResult("不存在订单");
+        }
+        else{
+            return ResultFactory.buildSuccessResult(orderList);
+        }
     }
 
     @Override
-    public List<Order> selectTenOrderByType(String type, int offset) {
-        return orderMapper.selectTenOrderByType(type, offset);
+    public Result selectTenOrderByType(String type, int offset) {
+        List<Order> orderList = orderMapper.selectTenOrder(offset);
+        if ( orderList.isEmpty()){
+            return ResultFactory.buildFailResult("不存在订单");
+        }
+        else{
+            return ResultFactory.buildSuccessResult(orderList);
+        }
     }
 }

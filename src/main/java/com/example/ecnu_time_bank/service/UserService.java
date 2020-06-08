@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface UserService {
 
-    User selectByID(Integer ID);
-    List<User> selectAllUser();
-    List<User> selectByUserName(String UserName);
+    Result selectByID(Integer ID);
+
+    Result selectAllUser();
+
+    Result selectByUserName(String UserName);
+
     Result deleteByID(Integer ID);
+
     Result updata(User user);
-    /**
-     * 添加(注册)用户
-     * @param user
-     * @return Result
-     */
+
     Result add(User user);
 
 }
