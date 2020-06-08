@@ -35,6 +35,10 @@ public class UserController {
         return userService.selectByID(userID);
     }
 
+    @GetMapping("/search")
+    public Result getUserByConditions(@RequestBody User user){
+        return userService.selectByConditions(user);
+    }
     /**
      * 用户注册
      */

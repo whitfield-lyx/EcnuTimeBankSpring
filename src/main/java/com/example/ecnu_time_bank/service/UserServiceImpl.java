@@ -7,7 +7,10 @@ import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -46,6 +49,19 @@ public class UserServiceImpl implements UserService{
         }
         else{
             return ResultFactory.buildSuccessResult(userList);
+        }
+    }
+    //todo 搞不来动态查询
+
+
+    @Override
+    public Result selectByConditions(User user) {
+        List<User> users = userMapper.selectByConditions(user);
+        if (users.isEmpty()){
+            return ResultFactory.buildFailResult("未找到用户");
+        }
+        else{
+            return ResultFactory.buildSuccessResult(users);
         }
     }
 

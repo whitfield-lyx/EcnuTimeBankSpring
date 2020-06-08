@@ -4,6 +4,7 @@ import com.example.ecnu_time_bank.entity.User;
 import com.example.ecnu_time_bank.utils.Result;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface UserService {
@@ -13,6 +14,8 @@ public interface UserService {
     Result selectAllUser();
 
     Result selectByUserName(String UserName);
+
+    Result selectByConditions(User user);
 
     Result deleteByID(Integer ID);
 
