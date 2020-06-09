@@ -4,10 +4,13 @@ package com.example.ecnu_time_bank.controller;
 import com.example.ecnu_time_bank.entity.User;
 import com.example.ecnu_time_bank.service.UserServiceImpl;
 import com.example.ecnu_time_bank.utils.Result;
+import com.example.ecnu_time_bank.utils.ResultCode;
+import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -30,11 +33,9 @@ public class UserController {
      */
     @GetMapping("/{userID}")
     @ResponseStatus(HttpStatus.OK)
-    public Result getUserByUserName(@PathVariable("userID") Integer userID)
-    {
+    public Result getUserByUserName(@PathVariable("userID") Integer userID) {
         return userService.selectByID(userID);
     }
-
     @GetMapping("/search")
     public Result getUserByConditions(@RequestBody User user){
         return userService.selectByConditions(user);
@@ -47,6 +48,19 @@ public class UserController {
     public Result register(@RequestBody User user) {
         return userService.add(user);
     }
+
+    /**
+     * 用户登录
+     * @param telephone
+     * @param password
+     * @return
+     */
+
+    @PostMapping("/login")
+    public Result login(String telephone, String password, HttpSession session){
+        return userService.login(telephone,password);
+    }
+
     /**
      * 删除用户
      */

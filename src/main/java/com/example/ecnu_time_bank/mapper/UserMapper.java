@@ -24,5 +24,7 @@ public interface UserMapper {
 
     List<User> selectByUserName(String userName);
 
+    User selectByTelephone(String userTelephone);
+
     List<User> selectAllUser();
 }

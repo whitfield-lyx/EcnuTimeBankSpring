@@ -22,14 +22,9 @@ public class FacilityController {
         return facilityService.selectAllFacility();
     }
 
-
     @GetMapping("/{facilityID}")
     @ResponseStatus(HttpStatus.OK)
-    public Result getFacilityByFacilityName(@PathVariable("facilityID") Integer facilityID)
-    {
-        return facilityService.selectByID(facilityID);
-    }
-
+    public Result getFacilityByFacilityName(@PathVariable("facilityID") Integer facilityID) { return facilityService.selectByID(facilityID); }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)

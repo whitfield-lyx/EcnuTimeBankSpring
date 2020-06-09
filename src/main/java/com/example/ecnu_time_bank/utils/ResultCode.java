@@ -15,8 +15,6 @@ public enum ResultCode {
      * 失败
      */
     FAIL(400),
-
-
     /**
      * 未认证（签名错误）
      */
@@ -39,4 +37,7 @@ public enum ResultCode {
         this.code = code;
     }
 
+    public int getCode() {
+        return code;
+    }
 }

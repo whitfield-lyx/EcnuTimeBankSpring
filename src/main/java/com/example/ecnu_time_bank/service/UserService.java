@@ -23,4 +23,6 @@ public interface UserService {
 
     Result add(User user);
 
+    Result login(String telephone, String password);
+
 }

@@ -1,8 +1,12 @@
 package com.example.ecnu_time_bank.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Result {
+public class Result<T> implements Serializable {
     /**
      * 响应状态码
      */
@@ -14,12 +18,33 @@ public class Result {
     /**
      * 响应结果对象
      */
-    private Object data;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private T data;
 
-    public Result(int code, String message, Object data) {
+    public Result(int code) {
+        this.code = code;
+    }
+
+    public Result(int code, T data) {
+        this.code = code;
+        this.data = data;
+    }
+
+    public Result(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public Result(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    @JsonIgnore
+    //使之不在json序列化结果当中
+    public boolean isSuccess(){
+        return this.code == ResultCode.SUCCESS.getCode();
     }
 
     public int getCode() {
@@ -38,11 +63,11 @@ public class Result {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

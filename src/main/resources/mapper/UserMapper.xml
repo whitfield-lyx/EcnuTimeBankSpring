@@ -55,8 +55,14 @@
         </if>
       </where>
   </select>
+    <select id="selectByTelephone" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from user
+      where user_telephone = #{userTelephone,jdbcType=VARCHAR}
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>

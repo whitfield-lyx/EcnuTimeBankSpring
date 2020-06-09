@@ -3,6 +3,7 @@ package com.example.ecnu_time_bank.service;
 import com.example.ecnu_time_bank.entity.User;
 import com.example.ecnu_time_bank.mapper.UserMapper;
 import com.example.ecnu_time_bank.utils.Result;
+import com.example.ecnu_time_bank.utils.ResultCode;
 import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,5 +103,22 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    @Override
+    public Result login(String telephone, String password) {
+        User curUser = userMapper.selectByTelephone(telephone);
+        String curPassWord;
+        if(curUser==null){
+            return ResultFactory.buildFailResult("不存在该用户");
+        }
+        else{
+            curPassWord = curUser.getUserPassword();
+            if (curPassWord.equals(password)){
+                return ResultFactory.buildResult(ResultCode.SUCCESS,"登录成功",curUser);
+            }
+            else{
+                return ResultFactory.buildFailResult("密码错误");
+            }
+        }
 
+    }
 }
