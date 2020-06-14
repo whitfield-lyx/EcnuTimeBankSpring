@@ -25,4 +25,5 @@ public interface UserService {
 
     Result login(String telephone, String password);
 
+     Result register(User user);
 }

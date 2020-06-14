@@ -45,8 +45,8 @@ public class UserController {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.OK)
-    public Result register(@RequestBody User user) {
-        return userService.add(user);
+    public Result registerUser(@RequestBody User user) {
+        return userService.register(user);
     }
 
     /**
@@ -57,7 +57,7 @@ public class UserController {
      */
 
     @PostMapping("/login")
-    public Result login(String telephone, String password, HttpSession session){
+    public Result loginUser(String telephone, String password, HttpSession session){
         return userService.login(telephone,password);
     }
 
@@ -66,13 +66,13 @@ public class UserController {
      */
     @DeleteMapping("/{userID}")
     @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable("userID") Integer ID){
+    public Result deleteUser(@PathVariable("userID") Integer ID){
         return userService.deleteByID(ID);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Result updateNews(@RequestBody User user){
+    public Result updateUser(@RequestBody User user){
         return userService.updata(user);
     }
 }

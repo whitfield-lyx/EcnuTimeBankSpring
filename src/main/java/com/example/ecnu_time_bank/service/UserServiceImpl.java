@@ -104,6 +104,20 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Result register(User user) {
+        User existUser = userMapper.selectByTelephone(user.getUserTelephone());
+        if(existUser==null){
+            user.setUserBalance(0.0);
+            userMapper.insert(user);
+            existUser = userMapper.selectByTelephone(user.getUserTelephone());
+            return ResultFactory.buildSuccessResult(existUser);
+        }
+        else {
+            return ResultFactory.buildFailResult("已存在手机号的用户");
+        }
+    }
+
+    @Override
     public Result login(String telephone, String password) {
         User curUser = userMapper.selectByTelephone(telephone);
         String curPassWord;

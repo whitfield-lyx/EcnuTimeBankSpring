@@ -28,19 +28,19 @@ public class FacilityController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Result register(@RequestBody Facility facility) {
+    public Result addFacility(@RequestBody Facility facility) {
         return facilityService.add(facility);
     }
 
     @DeleteMapping("/{facilityID}")
     @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable("facilityID") Integer ID){
+    public Result deleteFacility(@PathVariable("facilityID") Integer ID){
         return facilityService.deleteByID(ID);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Result updateNews(@RequestBody Facility facility){
+    public Result updateFacility(@RequestBody Facility facility){
         return facilityService.updata(facility);
     }
 }
