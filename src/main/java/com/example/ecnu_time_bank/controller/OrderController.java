@@ -44,4 +44,15 @@ public class OrderController {
     public Result getTenOrderByType(@PathVariable String type, @PathVariable Integer offset) {
         return orderService.selectTenOrderByType(type, offset);
     }
+
+    @GetMapping("/accepted/{userId}/offset/{offset}")
+    public Result getAcceptedOrderByUserId(@PathVariable Integer userId, @PathVariable Integer offset) {
+        return orderService.selectTenAcceptedOrderByUserId(userId, offset);
+    }
+
+    @GetMapping("/published/{userId}/offset/{offset}")
+    public Result getPublishedOrderByUserId(@PathVariable Integer userId, @PathVariable Integer offset) {
+        return orderService.selectTenPublishedOrderByUserId(userId, offset);
+    }
+
 }

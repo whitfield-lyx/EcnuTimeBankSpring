@@ -97,4 +97,24 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildSuccessResult(orderList);
         }
     }
+
+    @Override
+    public Result selectTenAcceptedOrderByUserId(Integer userId, int offset) {
+        List<Order> orders = orderMapper.selectTenAcceptedOrderByUserId(userId, offset);
+        if (orders.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在符合要求的订单");
+        } else {
+            return ResultFactory.buildSuccessResult(orders);
+        }
+    }
+
+    @Override
+    public Result selectTenPublishedOrderByUserId(Integer userId, int offset) {
+        List<Order> orders = orderMapper.selectTenPublishedOrderByUserId(userId, offset);
+        if (orders.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在符合要求的订单");
+        } else {
+            return ResultFactory.buildSuccessResult(orders);
+        }
+    }
 }

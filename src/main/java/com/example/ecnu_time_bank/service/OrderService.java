@@ -17,4 +17,8 @@ public interface OrderService {
     Result selectTenOrder(int offset);
 
     Result selectTenOrderByType(String type, int offset);
+
+    Result selectTenAcceptedOrderByUserId(Integer userId, int offset);
+
+    Result selectTenPublishedOrderByUserId(Integer userId, int offset);
 }
