@@ -25,11 +25,17 @@ public interface OrderMapper {
     @Select("select * from `order` where order_id=#{orderId}")
     Order selectById(Integer orderId);
 
-    @Select("select * from `order` where order_type=#{type} limit #{offset},10")
+    @Select("select * from `order` where order_type=#{type} order by order_time limit #{offset},10")
     List<Order> selectTenOrderByType(String type, int offset);
 
     @Select("select * from `order` order by order_time limit #{offset},10")
     List<Order> selectTenOrder(int offset);
+
+    @Select("select * from `order` where order_accpeters_id=#{userId} order by order_time limit #{offset},10")
+    List<Order> selectTenAcceptedOrderByUserId(Integer userId, int offset);
+
+    @Select("select * from `order` where order_publisher_id=#{userId} order by order_time limit #{offset},10")
+    List<Order> selectTenPublishedOrderByUserId(Integer userId, int offset);
 
     @Delete("delete from `order` where order_id=#{orderId}")
     int delete(Integer orderId);

@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Result selectByID(Integer ID) {
-        Order result =  orderMapper.selectById(ID);
+        Order result = orderMapper.selectById(ID);
         if (result == null) {
             return ResultFactory.buildFailResult("未找到该需求,orderId = " + ID);
         } else {
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
         if (result == 0) {
             return ResultFactory.buildFailResult("未找到该需求,orderId = " + ID);
         } else {
-            return ResultFactory.buildResult(ResultCode.SUCCESS,"删除成功 OrderId = "+ID,null);
+            return ResultFactory.buildResult(ResultCode.SUCCESS, "删除成功 OrderId = " + ID, null);
         }
     }
 
@@ -62,6 +62,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Result add(Order order) {
+//        todo null值要有默认值
         setOrderPublishedTime(order);
         order.setOrderState("发布中");
         int result = orderMapper.insert(order);
@@ -80,22 +81,40 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Result selectTenOrder(int offset) {
         List<Order> orderList = orderMapper.selectTenOrder(offset);
-        if ( orderList.isEmpty()){
+        if (orderList.isEmpty()) {
             return ResultFactory.buildFailResult("不存在订单");
-        }
-        else{
+        } else {
             return ResultFactory.buildSuccessResult(orderList);
         }
     }
 
     @Override
     public Result selectTenOrderByType(String type, int offset) {
-        List<Order> orderList = orderMapper.selectTenOrder(offset);
-        if ( orderList.isEmpty()){
-            return ResultFactory.buildFailResult("不存在订单");
-        }
-        else{
+        List<Order> orderList = orderMapper.selectTenOrderByType(type, offset);
+        if (orderList.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在符合要求的订单");
+        } else {
             return ResultFactory.buildSuccessResult(orderList);
+        }
+    }
+
+    @Override
+    public Result selectTenAcceptedOrderByUserId(Integer userId, int offset) {
+        List<Order> orders = orderMapper.selectTenAcceptedOrderByUserId(userId, offset);
+        if (orders.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在符合要求的订单");
+        } else {
+            return ResultFactory.buildSuccessResult(orders);
+        }
+    }
+
+    @Override
+    public Result selectTenPublishedOrderByUserId(Integer userId, int offset) {
+        List<Order> orders = orderMapper.selectTenPublishedOrderByUserId(userId, offset);
+        if (orders.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在符合要求的订单");
+        } else {
+            return ResultFactory.buildSuccessResult(orders);
         }
     }
 }
