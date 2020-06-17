@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
             return ResultFactory.buildSuccessResult(userList);
         }
     }
-    //todo 搞不来动态查询
+
 
 
     @Override

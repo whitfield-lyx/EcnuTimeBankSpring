@@ -19,7 +19,8 @@ public interface OrderMapper {
             "#{orderAddress},#{orderTelephone},#{orderBonus},#{orderPublisherId},#{orderState})")
     int insert(Order record);
 
-//    int insertSelective(Order record);
+
+// to do   int insertSelective(Order record);
 
     @Select("select * from `order` where order_id=#{orderId}")
     Order selectById(Integer orderId);

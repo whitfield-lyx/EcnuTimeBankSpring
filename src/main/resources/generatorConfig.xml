@@ -15,9 +15,9 @@
         </commentGenerator>
         <!--jdbc的数据库连接 wg_insert 为数据库名字-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/ecnutimebank?useUnicode=true&amp;characeterEncoding=utf-8&amp;serverTimezone=UTC"
+                        connectionURL="jdbc:mysql://rm-uf6np0fpyhz82r9ngeo.mysql.rds.aliyuncs.com:3306/ecnu_time_bank?useUnicode=true;characterEncoding=utf-8;serverTimezone=UTC"
                         userId="root"
-                        password="123456">
+                        password="!@#qwe123">
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
@@ -70,9 +70,13 @@
         13，modelType：参考context元素的defaultModelType，相当于覆盖；
         14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）
         15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性-->
-        <table tableName="user" domainObjectName="User"
+        <table tableName="volunteer_for" domainObjectName="VolunteerFor"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"/>
+        <!--<table tableName="user" domainObjectName="User"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"></table>
+               -->
         <!--<table tableName="order" domainObjectName="Order"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"

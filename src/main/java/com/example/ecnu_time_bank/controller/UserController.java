@@ -36,6 +36,7 @@ public class UserController {
     public Result getUserByUserName(@PathVariable("userID") Integer userID) {
         return userService.selectByID(userID);
     }
+
     @GetMapping("/search")
     public Result getUserByConditions(@RequestBody User user){
         return userService.selectByConditions(user);
