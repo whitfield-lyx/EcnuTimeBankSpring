@@ -39,7 +39,7 @@ public class OrderController {
         return orderService.cancelOrder(orderId);
     }
     @PutMapping("/confirmOrder")
-    public Result cancelOrder(Integer orderId,Integer volunteerId) {
+    public Result confirmOrder(Integer orderId,Integer volunteerId) {
         return orderService.confirmOrder(orderId,volunteerId);
     }
     @DeleteMapping("/{orderId}")
