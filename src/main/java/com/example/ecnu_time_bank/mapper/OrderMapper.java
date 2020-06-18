@@ -54,4 +54,10 @@ public interface OrderMapper {
             "SET order_accpeters_id = 0 " +
             "WHERE order_id = #{orderId} ")
     int cancelOrder(Order order);
+
+    //用于确定订单的执行志愿者
+    @Update("UPDATE `order` " +
+            "SET order_accpeters_id = #{volunteerId} " +
+            "WHERE order_id = #{orderId} ")
+    int comfirmlOrder(Integer orderId, Integer volunteerId);
 }

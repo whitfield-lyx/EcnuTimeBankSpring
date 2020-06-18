@@ -38,7 +38,10 @@ public class OrderController {
     public Result cancelOrder(@PathVariable Integer orderId) {
         return orderService.cancelOrder(orderId);
     }
-
+    @PutMapping("/confirmOrder")
+    public Result cancelOrder(Integer orderId,Integer volunteerId) {
+        return orderService.confirmOrder(orderId,volunteerId);
+    }
     @DeleteMapping("/{orderId}")
     public Result deleteOrder(@PathVariable Integer orderId) {
         return orderService.deleteByID(orderId);

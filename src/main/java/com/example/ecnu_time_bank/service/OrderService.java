@@ -23,4 +23,6 @@ public interface OrderService {
     Result selectTenAcceptedOrderByUserId(Integer userId, int offset);
 
     Result selectTenPublishedOrderByUserId(Integer userId, int offset);
+
+    Result confirmOrder(Integer orderId, Integer volunteerId);
 }

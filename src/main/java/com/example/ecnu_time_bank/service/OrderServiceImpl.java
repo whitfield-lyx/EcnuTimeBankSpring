@@ -129,4 +129,18 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildSuccessResult(orders);
         }
     }
+
+    @Override
+    public Result confirmOrder(Integer orderId, Integer volunteerId) {
+        Order orderExisted = orderMapper.selectById(orderId);
+        if (orderExisted == null) {
+            return ResultFactory.buildFailResult("错误的orderId: " +orderId);
+        }
+        int result = orderMapper.comfirmlOrder(orderId,volunteerId);
+        if (result == 0) {
+            return ResultFactory.buildFailResult("未成功选定志愿者,orderId = " +orderExisted.getOrderId());
+        } else {
+            return ResultFactory.buildSuccessResult(orderMapper.selectById(orderId));
+        }
+    }
 }
