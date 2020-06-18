@@ -32,10 +32,10 @@ public class VolunteerForController {
             return volunteerForService.add(volunteerFor);
         }
 
-        @DeleteMapping("/{volunteerForID}")
+        @DeleteMapping("")
         @ResponseStatus(HttpStatus.OK)
-        public Result deleteVolunteerFor(@PathVariable("volunteerForID") Integer ID){
-            return volunteerForService.deleteByID(ID);
+        public Result deleteVolunteerFor(Integer orderId,Integer volunteerId){
+            return volunteerForService.deleteByTwoID(orderId,volunteerId);
         }
 
         @PutMapping("/update")

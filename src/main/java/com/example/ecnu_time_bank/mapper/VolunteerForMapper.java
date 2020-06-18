@@ -8,6 +8,8 @@ import java.util.List;
 public interface VolunteerForMapper {
     int deleteByPrimaryKey(Integer volunteerForId);
 
+    int deleteByTwoId(Integer orderId,Integer userId);
+
     int insert(VolunteerFor record);
 
     int insertSelective(VolunteerFor record);
@@ -17,6 +19,8 @@ public interface VolunteerForMapper {
     List<VolunteerFor> selectAllVolunteerFor();
 
     VolunteerFor selectByPrimaryKey(Integer volunteerForId);
+
+    VolunteerFor selectByTwoId(Integer orderId,Integer volunteerId);
 
     int updateByPrimaryKeySelective(VolunteerFor record);
 

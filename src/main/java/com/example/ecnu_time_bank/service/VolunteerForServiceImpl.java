@@ -55,13 +55,13 @@ public class VolunteerForServiceImpl implements VolunteerForService {
     }
 
     @Override
-    public Result deleteByID(Integer ID) {
-        VolunteerFor volunteerFor = volunteerForMapper.selectByPrimaryKey(ID);
+    public Result deleteByTwoID(Integer orderId,Integer volunteerId) {
+        VolunteerFor volunteerFor = volunteerForMapper.selectByTwoId(orderId,volunteerId);
         if (volunteerFor == null) {
-            return ResultFactory.buildFailResult("未找到该志愿服务关系,volunteerForID = " + ID);
+            return ResultFactory.buildFailResult("未找到该志愿服务关系,orderId = " +orderId+" & volunteerId = "+volunteerId);
         } else {
-            volunteerForMapper.deleteByPrimaryKey(ID);
-            return ResultFactory.buildSuccessResult(null);
+            volunteerForMapper.deleteByTwoId(orderId,volunteerId);
+            return ResultFactory.buildSuccessResult(volunteerFor);
         }
     }
 
