@@ -1,17 +1,23 @@
 package com.example.ecnu_time_bank.service;
 
+import com.example.ecnu_time_bank.entity.User;
 import com.example.ecnu_time_bank.entity.VolunteerFor;
+import com.example.ecnu_time_bank.mapper.UserMapper;
 import com.example.ecnu_time_bank.mapper.VolunteerForMapper;
 import com.example.ecnu_time_bank.utils.Result;
 import com.example.ecnu_time_bank.utils.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class VolunteerForServiceImpl implements VolunteerForService {
+
     @Autowired
     private VolunteerForMapper volunteerForMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Result selectByID(Integer ID) {
@@ -37,10 +43,14 @@ public class VolunteerForServiceImpl implements VolunteerForService {
     @Override
     public Result selectByOrderID(Integer OrderId) {
         List<VolunteerFor> volunteerForList = volunteerForMapper.selectByOrderId(OrderId);
+        List<User> volunteersList = new ArrayList<>();
         if (volunteerForList.isEmpty()) {
             return ResultFactory.buildFailResult("不存在志愿服务关系");
         } else {
-            return ResultFactory.buildSuccessResult(volunteerForList);
+            for(VolunteerFor volunteerFor : volunteerForList){
+                volunteersList.add(userMapper.selectByPrimaryKey(volunteerFor.getVolunteerId()));
+            }
+            return ResultFactory.buildSuccessResult(volunteersList);
         }
     }
 
