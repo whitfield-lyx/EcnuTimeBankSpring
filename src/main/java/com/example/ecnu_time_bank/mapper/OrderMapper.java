@@ -46,6 +46,7 @@ public interface OrderMapper {
             "order_bonus=#{orderBonus}," +
             "order_telephone=#{orderTelephone}," +
             "order_type=#{orderType}," +
-            "order_address=#{orderAddress} where order_id=#{orderId}")
+            "order_address=#{orderAddress}," +
+            "order_accpeters_id=#{orderAccpetersId} where order_id=#{orderId}")
     int update(Order order);
 }

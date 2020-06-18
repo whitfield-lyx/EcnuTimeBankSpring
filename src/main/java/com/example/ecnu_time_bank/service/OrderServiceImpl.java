@@ -51,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         orderExisted.setOrderType(order.getOrderBonus() != null ? order.getOrderType() : orderExisted.getOrderType());
         orderExisted.setOrderDescription(order.getOrderDescription() != null ? order.getOrderDescription() : orderExisted.getOrderDescription());
         orderExisted.setOrderAddress(order.getOrderAddress() != null ? order.getOrderAddress() : orderExisted.getOrderAddress());
+        orderExisted.setOrderAccpetersId(order.getOrderAccpetersId() != null ? order.getOrderAccpetersId() : orderExisted.getOrderAccpetersId());
         int result = orderMapper.update(orderExisted);
         Order newOrder = orderMapper.selectById(order.getOrderId());
         if (result == 0) {
