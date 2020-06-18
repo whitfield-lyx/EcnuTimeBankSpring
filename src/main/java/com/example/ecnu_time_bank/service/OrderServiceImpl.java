@@ -60,7 +60,19 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildSuccessResult(newOrder);
         }
     }
-
+    @Override
+    public Result cancelOrder(Integer orderId){
+        Order orderExisted = orderMapper.selectById(orderId);
+        if (orderExisted == null) {
+            return ResultFactory.buildFailResult("错误的orderId: " +orderId);
+        }
+        int result = orderMapper.cancelOrder(orderExisted);
+        if (result == 0) {
+            return ResultFactory.buildFailResult("未成功取消该需求,orderId = " +orderExisted.getOrderId());
+        } else {
+            return ResultFactory.buildSuccessResult(orderExisted.getOrderId());
+        }
+    }
     @Override
     public Result add(Order order) {
 //        todo null值要有默认值
@@ -116,6 +128,20 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildFailResult("不存在符合要求的订单");
         } else {
             return ResultFactory.buildSuccessResult(orders);
+        }
+    }
+
+    @Override
+    public Result confirmOrder(Integer orderId, Integer volunteerId) {
+        Order orderExisted = orderMapper.selectById(orderId);
+        if (orderExisted == null) {
+            return ResultFactory.buildFailResult("错误的orderId: " +orderId);
+        }
+        int result = orderMapper.comfirmlOrder(orderId,volunteerId);
+        if (result == 0) {
+            return ResultFactory.buildFailResult("未成功选定志愿者,orderId = " +orderExisted.getOrderId());
+        } else {
+            return ResultFactory.buildSuccessResult(orderMapper.selectById(orderId));
         }
     }
 }

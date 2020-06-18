@@ -12,6 +12,8 @@ public interface OrderService {
 
     Result update(Order order);
 
+    Result cancelOrder(Integer orderId);
+
     Result add(Order order);
 
     Result selectTenOrder(int offset);
@@ -21,4 +23,6 @@ public interface OrderService {
     Result selectTenAcceptedOrderByUserId(Integer userId, int offset);
 
     Result selectTenPublishedOrderByUserId(Integer userId, int offset);
+
+    Result confirmOrder(Integer orderId, Integer volunteerId);
 }

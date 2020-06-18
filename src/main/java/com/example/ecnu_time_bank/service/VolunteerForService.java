@@ -11,7 +11,7 @@ public interface VolunteerForService {
 
     Result selectByOrderID(Integer OrderId);
 
-    Result deleteByID(Integer ID);
+    Result deleteByTwoID(Integer orderId,Integer volunteerId);
 
     Result updata(VolunteerFor volunteerFor);
 
