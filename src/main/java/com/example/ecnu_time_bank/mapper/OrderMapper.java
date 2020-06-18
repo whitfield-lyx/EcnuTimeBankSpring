@@ -48,4 +48,10 @@ public interface OrderMapper {
             "order_type=#{orderType}," +
             "order_address=#{orderAddress} where order_id=#{orderId}")
     int update(Order order);
+
+
+    @Update("UPDATE `order` " +
+            "SET order_accpeters_id = 0 " +
+            "WHERE order_id = #{orderId} ")
+    int cancelOrder(Order order);
 }

@@ -59,7 +59,19 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildSuccessResult(newOrder);
         }
     }
-
+    @Override
+    public Result cancelOrder(Integer orderId){
+        Order orderExisted = orderMapper.selectById(orderId);
+        if (orderExisted == null) {
+            return ResultFactory.buildFailResult("错误的orderId: " +orderId);
+        }
+        int result = orderMapper.cancelOrder(orderExisted);
+        if (result == 0) {
+            return ResultFactory.buildFailResult("未成功取消该需求,orderId = " +orderExisted.getOrderId());
+        } else {
+            return ResultFactory.buildSuccessResult(orderExisted.getOrderId());
+        }
+    }
     @Override
     public Result add(Order order) {
 //        todo null值要有默认值

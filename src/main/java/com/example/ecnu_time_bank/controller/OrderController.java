@@ -29,10 +29,14 @@ public class OrderController {
     public Result addNewOrder(@RequestBody Order order) {
         return orderService.add(order);
     }
-
     @PutMapping("")
     public Result updateOrder(@RequestBody Order order) {
         return orderService.update(order);
+    }
+
+    @PutMapping("/cancelOrder/{orderId}")
+    public Result cancelOrder(@PathVariable Integer orderId) {
+        return orderService.cancelOrder(orderId);
     }
 
     @DeleteMapping("/{orderId}")

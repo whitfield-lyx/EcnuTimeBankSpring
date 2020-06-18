@@ -12,6 +12,8 @@ public interface OrderService {
 
     Result update(Order order);
 
+    Result cancelOrder(Integer orderId);
+
     Result add(Order order);
 
     Result selectTenOrder(int offset);
