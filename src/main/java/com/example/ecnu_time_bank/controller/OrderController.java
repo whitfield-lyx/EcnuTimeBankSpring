@@ -62,4 +62,9 @@ public class OrderController {
         return orderService.selectTenPublishedOrderByUserId(userId, offset);
     }
 
+    @GetMapping("/search/{keyword}")
+    public Result getAllOrderBySearch(@PathVariable String keyword) {
+        return orderService.selectAllOrderBySearch(keyword);
+    }
+
 }

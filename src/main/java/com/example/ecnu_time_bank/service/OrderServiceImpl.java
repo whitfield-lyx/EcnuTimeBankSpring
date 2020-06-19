@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -142,6 +143,35 @@ public class OrderServiceImpl implements OrderService {
             return ResultFactory.buildFailResult("未成功选定志愿者,orderId = " +orderExisted.getOrderId());
         } else {
             return ResultFactory.buildSuccessResult(orderMapper.selectById(orderId));
+        }
+    }
+
+    @Override
+    public Result selectAllOrderBySearch(String keyword) {
+        keyword = "%" + keyword + "%";
+        List<Order> searchOnTitle = orderMapper.selectAllOrderBySearchOnTitle(keyword);
+        List<Order> searchOnAddress = orderMapper.selectAllOrderBySearchOnAddress(keyword);
+        List<Order> searchOnDescription = orderMapper.selectAllOrderBySearchOnDescription(keyword);
+        HashSet<Integer> ordersId = new HashSet<>();
+        for (Order order : searchOnTitle) {
+            ordersId.add(order.getOrderId());
+        }
+        for (Order onAddress : searchOnAddress) { // 去重添加
+            if (!ordersId.contains(onAddress.getOrderId())) {
+                searchOnTitle.add(onAddress);
+                ordersId.add(onAddress.getOrderId());
+            }
+        }
+        for (Order onDescription : searchOnDescription) {
+            if (!ordersId.contains(onDescription.getOrderId())) {
+                searchOnTitle.add(onDescription);
+                ordersId.add(onDescription.getOrderId());
+            }
+        }
+        if (searchOnTitle.isEmpty()) {
+            return ResultFactory.buildFailResult("不存在查询的订单");
+        } else {
+            return ResultFactory.buildSuccessResult(searchOnTitle);
         }
     }
 }

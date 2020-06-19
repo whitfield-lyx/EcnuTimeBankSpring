@@ -25,4 +25,6 @@ public interface OrderService {
     Result selectTenPublishedOrderByUserId(Integer userId, int offset);
 
     Result confirmOrder(Integer orderId, Integer volunteerId);
+
+    Result selectAllOrderBySearch(String keyword);
 }

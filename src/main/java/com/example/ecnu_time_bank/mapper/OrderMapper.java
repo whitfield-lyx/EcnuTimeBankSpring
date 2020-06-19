@@ -37,6 +37,15 @@ public interface OrderMapper {
     @Select("select * from `order` where order_publisher_id=#{userId} order by order_time limit #{offset},10")
     List<Order> selectTenPublishedOrderByUserId(Integer userId, int offset);
 
+    @Select("select * from `order` where order_title like #{keyword} order by order_time")
+    List<Order> selectAllOrderBySearchOnTitle(String keyword);
+
+    @Select("select * from `order` where order_description like #{keyword} order by order_time")
+    List<Order> selectAllOrderBySearchOnDescription(String keyword);
+
+    @Select("select * from `order` where order_address like #{keyword} order by order_time")
+    List<Order> selectAllOrderBySearchOnAddress(String keyword);
+
     @Delete("delete from `order` where order_id=#{orderId}")
     int delete(Integer orderId);
 
